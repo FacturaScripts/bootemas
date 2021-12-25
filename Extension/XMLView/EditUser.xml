@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<view>
+    <columns>
+        <group name="data" numcolumns="12">
+            <column name="bootema" numcolumns="3" order="151">
+                <widget type="select" fieldname="bootema" icon="fas fa-spray-can">
+                    <values title="cerulean">cerulean</values>
+                    <values title="cosmo">cosmo</values>
+                    <values title="cyborg">cyborg</values>
+                    <values title="darkly">darkly</values>
+                    <values title="flatly">flatly</values>
+                    <values title="journal">journal</values>
+                    <values title="litera">litera</values>
+                    <values title="lumen">lumen</values>
+                    <values title="lux">lux</values>
+                    <values title="materia">materia</values>
+                    <values title="minty">minty</values>
+                    <values title="pulse">pulse</values>
+                    <values title="sandstone">sandstone</values>
+                    <values title="simplex">simplex</values>
+                    <values title="sketchy">sketchy</values>
+                    <values title="slate">slate</values>
+                    <values title="solar">solar</values>
+                    <values title="spacelab">spacelab</values>
+                    <values title="superhero">superhero</values>
+                    <values title="united">united</values>
+                    <values title="yeti">yeti</values>
+                </widget>
+            </column>
+        </group>
+    </columns>
+</view>
