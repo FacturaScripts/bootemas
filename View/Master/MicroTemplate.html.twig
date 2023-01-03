@@ -51,6 +51,7 @@
     {% for css in assetManager.get('css') %}
         <link rel="stylesheet" href="{{ css }}"/>
     {% endfor %}
+    <style>{{ appSettings.get('default', 'css_style') }}</style>
     {% block javascripts %}
         <script type="text/javascript" src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
         <script type="text/javascript"
