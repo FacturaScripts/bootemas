@@ -1,7 +1,7 @@
 {#
 /**
  * This file is part of FacturaScripts
- * Copyright (C) 2017-2021 Carlos Garcia Gomez <carlos@facturascripts.com>
+ * Copyright (C) 2017-2023 Carlos Garcia Gomez <carlos@facturascripts.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -24,7 +24,7 @@
     {% block meta %}
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>{{ fsc.title | raw }}</title>
-        <meta name="description" content="{{ i18n.trans('meta-description') }}"/>
+        <meta name="description" content="{{ trans('meta-description') }}"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta name="generator" content="FacturaScripts"/>
         <meta name="robots" content="noindex"/>
@@ -71,7 +71,7 @@
         <nav class="navbar navbar-expand navbar-dark bg-primary sticky-top d-print-none">
             {% block navbarContent %}
                 <a class="navbar-brand text-capitalize d-none d-sm-inline" href="{{ asset('') }}"
-                   title="{{ i18n.trans('homepage') }}">
+                   title="{{ trans('homepage') }}">
                     <i class="fas fa-folder-open"></i>
                     <span class="d-none d-xl-inline">{{ fsc.empresa.nombrecorto | raw }}</span>
                 </a>
@@ -84,36 +84,36 @@
                     </ul>
                     <ul class="navbar-nav flex-row ml-auto">
                         <li class="nav-item{{ template == 'MegaSearch.html.twig' ? ' active' : '' }}"
-                            title="{{ i18n.trans('search') }}">
+                            title="{{ trans('search') }}">
                             <a class="nav-link" href="MegaSearch">
                                 <i class="fas fa-search" aria-hidden="true"></i>
                             </a>
                         </li>
                         <li class="nav-item{{ template == 'Dashboard.html.twig' ? ' active' : '' }}"
-                            title="{{ i18n.trans('dashboard') }}">
+                            title="{{ trans('dashboard') }}">
                             <a class="nav-link" href="Dashboard">
                                 <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
                             </a>
                         </li>
-                        {% if constant('MC20_INSTALLATION') is defined %}
-                            <li class="nav-item" title="{{ i18n.trans('help') }}">
-                                <a class="nav-link" href="/support?action=controller&name={{ fsc.getPageData().name }}"
-                                   target="_blank">
+                        {% if constant('CITY_URL') is defined %}
+                            <li class="nav-item" title="{{ trans('help') }}">
+                                <a class="nav-link" target="_blank"
+                                   href="https://factura.city/ayuda?action=controller&name={{ fsc.getPageData().name }}">
                                     <i class="fas fa-question-circle" aria-hidden="true"></i>
                                 </a>
                             </li>
-                            <li class="nav-item" title="{{ i18n.trans('exit') }}">
+                            <li class="nav-item" title="{{ trans('exit') }}">
                                 <a class="nav-link" href="/">
                                     <i class="fas fa-door-open" aria-hidden="true"></i>
                                 </a>
                             </li>
                         {% else %}
-                            <li class="nav-item" title="{{ i18n.trans('help') }}">
+                            <li class="nav-item" title="{{ trans('help') }}">
                                 <a class="nav-link" href="https://facturascripts.com/ayuda" target="_blank">
                                     <i class="fas fa-question-circle fa-fw" aria-hidden="true"></i>
                                 </a>
                             </li>
-                            <li class="nav-item dropdown" title="{{ i18n.trans('user') }}">
+                            <li class="nav-item dropdown" title="{{ trans('user') }}">
                                 <a class="nav-link dropdown-toggle mr-md-2" href="#" data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>
@@ -125,7 +125,7 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="?logout=TRUE">
                                         <i class="fas fa-door-open fa-fw"
-                                           aria-hidden="true"></i> {{ i18n.trans('logout') }}
+                                           aria-hidden="true"></i> {{ trans('logout') }}
                                     </a>
                                 </div>
                             </li>
