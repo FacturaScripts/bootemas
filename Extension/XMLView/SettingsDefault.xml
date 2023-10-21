@@ -27,6 +27,9 @@
                     <values title="Yeti">yeti</values>
                 </widget>
             </column>
+            <column name="css-style" numcolumns="12" order="200">
+                <widget type="textarea" fieldname="css_style" rows="10" />
+            </column>
         </group>
     </columns>
 </view>
