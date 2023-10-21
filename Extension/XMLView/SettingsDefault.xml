@@ -28,7 +28,7 @@
                 </widget>
             </column>
             <column name="css-style" numcolumns="12" order="200">
-                <widget type="textarea" fieldname="css_style" rows="10" />
+                <widget type="textarea" fieldname="css_style"/>
             </column>
         </group>
     </columns>

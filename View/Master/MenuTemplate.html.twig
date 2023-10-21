@@ -45,7 +45,7 @@
             <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}"/>
         {% endif %}
         <link rel="stylesheet" href="{{ asset('node_modules/@fortawesome/fontawesome-free/css/all.min.css') }}"/>
-        <link rel="stylesheet" href="{{ asset('Dinamic/Assets/CSS/custom.css') }}?v=3"/>
+        <link rel="stylesheet" href="{{ asset('Dinamic/Assets/CSS/custom.css') }}?v={{ 'now' | date('ymd') }}"/>
     {% endblock %}
     {# Adds custom CSS assets #}
     {% for css in assetManager.get('css') %}
@@ -59,7 +59,7 @@
         <script src="{{ asset('node_modules/bootbox/dist/bootbox.locales.min.js') }}"></script>
         <script src="{{ asset('node_modules/pace-js/pace.min.js') }}"></script>
         <script src="{{ asset('node_modules/@fortawesome/fontawesome-free/js/all.min.js') }}"></script>
-        <script src="{{ asset('Dinamic/Assets/JS/Custom.js') }}?v=3"></script>
+        <script src="{{ asset('Dinamic/Assets/JS/Custom.js') }}?v={{ 'now' | date('ymd') }}"></script>
     {% endblock %}
     {# Adds custom JS assets #}
     {% for js in assetManager.get('js') %}
@@ -85,35 +85,33 @@
                         {% endfor %}
                     </ul>
                     <ul class="navbar-nav flex-row ml-auto">
-                        <li class="nav-item{{ template == 'MegaSearch.html.twig' ? ' active' : '' }}"
-                            title="{{ trans('search') }}">
-                            <a class="nav-link" href="MegaSearch">
-                                <i class="fas fa-search" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item{{ template == 'Dashboard.html.twig' ? ' active' : '' }}"
-                            title="{{ trans('dashboard') }}">
-                            <a class="nav-link" href="Dashboard">
-                                <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        {% if constant('CITY_URL') is defined %}
-                            <li class="nav-item" title="{{ trans('help') }}">
-                                <a class="nav-link" target="_blank"
-                                   href="https://factura.city/ayuda?action=controller&name={{ fsc.getPageData().name }}">
-                                    <i class="fas fa-question-circle" aria-hidden="true"></i>
+                        {% block navbarMenuIcon %}
+                            {% for item in getIncludeViews('MenuTemplate', 'MenuIconBefore') %}
+                                {% include item['path'] %}
+                            {% endfor %}
+                            <li class="nav-item{{ template == 'MegaSearch.html.twig' ? ' active' : '' }}"
+                                title="{{ trans('search') }}">
+                                <a class="nav-link" href="MegaSearch">
+                                    <i class="fas fa-search" aria-hidden="true"></i>
                                 </a>
                             </li>
-                            <li class="nav-item" title="{{ trans('exit') }}">
-                                <a class="nav-link" href="/">
-                                    <i class="fas fa-door-open" aria-hidden="true"></i>
+                            <li class="nav-item{{ template == 'Dashboard.html.twig' ? ' active' : '' }}"
+                                title="{{ trans('dashboard') }}">
+                                <a class="nav-link" href="Dashboard">
+                                    <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
                                 </a>
                             </li>
-                        {% else %}
                             <li class="nav-item" title="{{ trans('help') }}">
-                                <a class="nav-link" href="https://facturascripts.com/ayuda" target="_blank">
-                                    <i class="fas fa-question-circle fa-fw" aria-hidden="true"></i>
-                                </a>
+                                {% if constant('CITY_URL') is defined %}
+                                    <a class="nav-link" id="helpButton" target="_blank"
+                                       href="https://factura.city/ayuda?action=controller&name={{ fsc.getPageData().name }}">
+                                        <i class="fas fa-question-circle" aria-hidden="true"></i>
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link" href="https://facturascripts.com/ayuda" target="_blank">
+                                        <i class="fas fa-question-circle fa-fw" aria-hidden="true"></i>
+                                    </a>
+                                {% endif %}
                             </li>
                             <li class="nav-item dropdown" title="{{ trans('user') }}">
                                 <a class="nav-link dropdown-toggle mr-md-2" href="#" data-toggle="dropdown"
@@ -124,13 +122,19 @@
                                     <a class="dropdown-item" href="{{ fsc.user.url() }}">
                                         <i class="fas fa-user-circle fa-fw" aria-hidden="true"></i> {{ fsc.user.nick }}
                                     </a>
+                                    {% for item in getIncludeViews('MenuTemplate', 'MenuIconUser') %}
+                                        {% include item['path'] %}
+                                    {% endfor %}
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="?logout=TRUE">
                                         <i class="fas fa-door-open fa-fw" aria-hidden="true"></i> {{ trans('logout') }}
                                     </a>
                                 </div>
                             </li>
-                        {% endif %}
+                            {% for item in getIncludeViews('MenuTemplate', 'MenuIconAfter') %}
+                                {% include item['path'] %}
+                            {% endfor %}
+                        {% endblock %}
                     </ul>
                 </div>
             {% endblock %}
