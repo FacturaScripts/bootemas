@@ -21,10 +21,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="{{ constant('FS_LANG') | slice(0, 2) }}"
       xml:lang="{{ constant('FS_LANG') | slice(0, 2) }}">
 <head>
+    {% for item in getIncludeViews('MenuTemplate', 'HeadFirst') %}
+        {% include item['path'] %}
+    {% endfor %}
     {% block meta %}
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>{{ fsc.title | raw }}</title>
-        <meta name="description" content="{{ trans('meta-description') }}"/>
+        <meta name="description" content="{{ i18n.trans('meta-description') }}"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta name="generator" content="FacturaScripts"/>
         <meta name="robots" content="noindex"/>
@@ -34,6 +37,9 @@
         <link rel="apple-touch-icon" sizes="180x180"
               href="{{ asset('Dinamic/Assets/Images/apple-icon-180x180.png') }}"/>
     {% endblock %}
+    {% for item in getIncludeViews('MenuTemplate', 'CssBefore') %}
+        {% include item['path'] %}
+    {% endfor %}
     {% block css %}
         {% if fsc.user.bootema %}
             <link rel="stylesheet"
@@ -51,7 +57,12 @@
     {% for css in assetManager.get('css') %}
         <link rel="stylesheet" href="{{ css }}"/>
     {% endfor %}
-    <style>{{ appSettings.get('default', 'css_style') }}</style>
+    {% for item in getIncludeViews('MenuTemplate', 'CssAfter') %}
+        {% include item['path'] %}
+    {% endfor %}
+    {% for item in getIncludeViews('MenuTemplate', 'JsHeadBefore') %}
+        {% include item['path'] %}
+    {% endfor %}
     {% block javascripts %}
         <script src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
         <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
@@ -65,15 +76,23 @@
     {% for js in assetManager.get('js') %}
         <script src="{{ js }}"></script>
     {% endfor %}
+    {% for item in getIncludeViews('MenuTemplate', 'JsHeadAfter') %}
+        {% include item['path'] %}
+    {% endfor %}
     {{ debugBarRender.renderHead() | raw }}
+    {% for item in getIncludeViews('MenuTemplate', 'HeadEnd') %}
+        {% include item['path'] %}
+    {% endfor %}
 </head>
 {% block fullBody %}
     <body>
+    {% for item in getIncludeViews('MenuTemplate', 'BodyFirst') %}
+        {% include item['path'] %}
+    {% endfor %}
     {% block navbar %}
         <nav class="navbar navbar-expand navbar-dark bg-primary sticky-top d-print-none">
             {% block navbarContent %}
-                <a class="navbar-brand text-capitalize d-none d-sm-inline" href="{{ asset('') }}"
-                   title="{{ trans('homepage') }}">
+                <a class="navbar-brand d-none d-sm-inline" href="{{ asset('') }}" title="{{ trans('homepage') }}">
                     <i class="fas fa-folder-open"></i>
                     <span class="d-none d-xl-inline">{{ fsc.empresa.nombrecorto | raw }}</span>
                 </a>
@@ -86,35 +105,41 @@
                     </ul>
                     <ul class="navbar-nav flex-row ml-auto">
                         {% block navbarMenuIcon %}
-                            {% for item in getIncludeViews('MenuTemplate', 'MenuIconBefore') %}
-                                {% include item['path'] %}
-                            {% endfor %}
-                            <li class="nav-item{{ template == 'MegaSearch.html.twig' ? ' active' : '' }}"
-                                title="{{ trans('search') }}">
-                                <a class="nav-link" href="MegaSearch" id="menuIconSearch">
-                                    <i class="fas fa-search" aria-hidden="true"></i>
+                        {% for item in getIncludeViews('MenuTemplate', 'MenuIconBefore') %}
+                            {% include item['path'] %}
+                        {% endfor %}
+                        <li class="nav-item{{ template == 'MegaSearch.html.twig' ? ' active' : '' }}"
+                            title="{{ i18n.trans('search') }}">
+                            <a class="nav-link" href="MegaSearch" id="menuIconSearch">
+                                <i class="fas fa-search" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item{{ template == 'Dashboard.html.twig' ? ' active' : '' }}"
+                            title="{{ i18n.trans('dashboard') }}">
+                            <a class="nav-link" href="Dashboard">
+                                <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        {% if constant('MC20_INSTALLATION') is defined %}
+                            <li class="nav-item" title="{{ i18n.trans('help') }}">
+                                <a class="nav-link" href="/support?action=controller&name={{ fsc.getPageData().name }}"
+                                   target="_blank">
+                                    <i class="fas fa-question-circle" aria-hidden="true"></i>
                                 </a>
                             </li>
-                            <li class="nav-item{{ template == 'Dashboard.html.twig' ? ' active' : '' }}"
-                                title="{{ trans('dashboard') }}">
-                                <a class="nav-link" href="Dashboard" id="menuIconDashboard">
-                                    <i class="fas fa-chalkboard-teacher" aria-hidden="true"></i>
+                            <li class="nav-item" title="{{ i18n.trans('exit') }}">
+                                <a class="nav-link" href="/">
+                                    <i class="fas fa-door-open" aria-hidden="true"></i>
                                 </a>
                             </li>
+                        {% else %}
                             <li class="nav-item" title="{{ trans('help') }}">
-                                {% if constant('CITY_URL') is defined %}
-                                    <a class="nav-link" id="menuIconHelp" target="_blank"
-                                       href="https://factura.city/ayuda?action=controller&name={{ fsc.getPageData().name }}">
-                                        <i class="fas fa-question-circle" aria-hidden="true"></i>
-                                    </a>
-                                {% else %}
-                                    <a class="nav-link" id="menuIconHelp" href="https://facturascripts.com/ayuda"
-                                       target="_blank">
-                                        <i class="fas fa-question-circle fa-fw" aria-hidden="true"></i>
-                                    </a>
-                                {% endif %}
+                                <a class="nav-link" href="https://facturascripts.com/ayuda" rel="nofollow"
+                                   target="_blank" id="menuIconHelp">
+                                    <i class="fas fa-question-circle" aria-hidden="true"></i>
+                                </a>
                             </li>
-                            <li class="nav-item dropdown" title="{{ trans('user') }}">
+                            <li class="nav-item dropdown" title="{{ i18n.trans('user') }}">
                                 <a class="nav-link dropdown-toggle mr-md-2" href="#" data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false" id="menuIconUser">
                                     <i class="fas fa-user-circle fa-fw" aria-hidden="true"></i>
@@ -128,13 +153,15 @@
                                     {% endfor %}
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="?logout=TRUE">
-                                        <i class="fas fa-door-open fa-fw" aria-hidden="true"></i> {{ trans('logout') }}
+                                        <i class="fas fa-door-open fa-fw"
+                                           aria-hidden="true"></i> {{ i18n.trans('logout') }}
                                     </a>
                                 </div>
                             </li>
                             {% for item in getIncludeViews('MenuTemplate', 'MenuIconAfter') %}
                                 {% include item['path'] %}
                             {% endfor %}
+                        {% endif %}
                         {% endblock %}
                     </ul>
                 </div>
@@ -161,10 +188,16 @@
     </div>
     {% block body %}
     {% endblock %}
+    {% for item in getIncludeViews('MenuTemplate', 'JsFooter') %}
+        {% include item['path'] %}
+    {% endfor %}
     <br/>
     <br/>
     <br/>
     {{ debugBarRender.render() | raw }}
+    {% for item in getIncludeViews('MenuTemplate', 'BodyEnd') %}
+        {% include item['path'] %}
+    {% endfor %}
     </body>
 {% endblock %}
 </html>
