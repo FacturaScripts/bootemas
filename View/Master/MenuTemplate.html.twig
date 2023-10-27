@@ -134,10 +134,22 @@
                             </li>
                         {% else %}
                             <li class="nav-item" title="{{ trans('help') }}">
-                                <a class="nav-link" href="https://facturascripts.com/ayuda" rel="nofollow"
-                                   target="_blank" id="menuIconHelp">
-                                    <i class="fas fa-question-circle" aria-hidden="true"></i>
-                                </a>
+                                {% if constant('CITY_URL') is defined %}
+                                    <a class="nav-link" id="menuIconHelp" target="_blank"
+                                       href="https://factura.city/ayuda?action=controller&name={{ fsc.getPageData().name }}">
+                                        <i class="fas fa-question-circle" aria-hidden="true"></i>
+                                    </a>
+                                {% elseif constant('MC20_INSTALLATION') is defined %}
+                                    <a class="nav-link" id="menuIconHelp" target="_blank"
+                                       href="/support?action=controller&name={{ fsc.getPageData().name }}">
+                                        <i class="fas fa-question-circle" aria-hidden="true"></i>
+                                    </a>
+                                {% else %}
+                                    <a class="nav-link" id="menuIconHelp" href="https://facturascripts.com/ayuda"
+                                       target="_blank">
+                                        <i class="fas fa-question-circle fa-fw" aria-hidden="true"></i>
+                                    </a>
+                                {% endif %}
                             </li>
                             <li class="nav-item dropdown" title="{{ i18n.trans('user') }}">
                                 <a class="nav-link dropdown-toggle mr-md-2" href="#" data-toggle="dropdown"
