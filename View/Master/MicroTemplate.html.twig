@@ -39,9 +39,9 @@
         {% if fsc.user.bootema %}
             <link rel="stylesheet"
                   href="{{ asset('Plugins/Bootemas/node_modules/bootswatch/dist/' ~ fsc.user.bootema ~ '/bootstrap.min.css') }}"/>
-        {% elseif appSettings.get('default','bootema') %}
+        {% elseif settings('default','bootema') %}
             <link rel="stylesheet"
-                  href="{{ asset('Plugins/Bootemas/node_modules/bootswatch/dist/' ~ appSettings.get('default','bootema') ~ '/bootstrap.min.css') }}"/>
+                  href="{{ asset('Plugins/Bootemas/node_modules/bootswatch/dist/' ~ settings('default','bootema') ~ '/bootstrap.min.css') }}"/>
         {% else %}
             <link rel="stylesheet" href="{{ asset('node_modules/bootstrap/dist/css/bootstrap.min.css') }}"/>
         {% endif %}
@@ -51,7 +51,7 @@
     {% for css in assetManager.get('css') %}
         <link rel="stylesheet" href="{{ css }}"/>
     {% endfor %}
-    <style>{{ appSettings.get('default', 'css_style') }}</style>
+    <style>{{ settings('default', 'css_style') }}</style>
     {% block javascripts %}
         <script src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
         <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
@@ -76,6 +76,7 @@
     {% block body %}
     {% endblock %}
     {{ debugBarRender.render() | raw }}
+    <!-- execution time: {{ executionTime() }} s -->
     </body>
 {% endblock %}
 </html>
