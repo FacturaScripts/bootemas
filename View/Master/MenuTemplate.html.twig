@@ -21,6 +21,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="{{ constant('FS_LANG') | slice(0, 2) }}"
       xml:lang="{{ constant('FS_LANG') | slice(0, 2) }}">
 <head>
+    {% for item in getIncludeViews('MenuTemplate', 'HeadFirst') %}
+        {% include item['path'] %}
+    {% endfor %}
     {% block meta %}
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <title>{{ fsc.title | raw }}</title>
@@ -34,6 +37,9 @@
         <link rel="apple-touch-icon" sizes="180x180"
               href="{{ asset('Dinamic/Assets/Images/apple-icon-180x180.png') }}"/>
     {% endblock %}
+    {% for item in getIncludeViews('MenuTemplate', 'CssBefore') %}
+        {% include item['path'] %}
+    {% endfor %}
     {% block css %}
         {% if fsc.user.bootema %}
             <link rel="stylesheet"
@@ -52,6 +58,12 @@
         <link rel="stylesheet" href="{{ css }}"/>
     {% endfor %}
     <style>{{ settings('default', 'css_style') }}</style>
+    {% for item in getIncludeViews('MenuTemplate', 'CssAfter') %}
+        {% include item['path'] %}
+    {% endfor %}
+    {% for item in getIncludeViews('MenuTemplate', 'JsHeadBefore') %}
+        {% include item['path'] %}
+    {% endfor %}
     {% block javascripts %}
         <script src="{{ asset('node_modules/jquery/dist/jquery.min.js') }}"></script>
         <script src="{{ asset('node_modules/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
@@ -65,10 +77,19 @@
     {% for js in assetManager.get('js') %}
         <script src="{{ js }}"></script>
     {% endfor %}
+    {% for item in getIncludeViews('MenuTemplate', 'JsHeadAfter') %}
+        {% include item['path'] %}
+    {% endfor %}
     {{ debugBarRender.renderHead() | raw }}
+    {% for item in getIncludeViews('MenuTemplate', 'HeadEnd') %}
+        {% include item['path'] %}
+    {% endfor %}
 </head>
 {% block fullBody %}
     <body>
+    {% for item in getIncludeViews('MenuTemplate', 'BodyFirst') %}
+        {% include item['path'] %}
+    {% endfor %}
     {% block navbar %}
         <nav class="navbar navbar-expand navbar-dark bg-primary sticky-top d-print-none">
             {% block navbarContent %}
