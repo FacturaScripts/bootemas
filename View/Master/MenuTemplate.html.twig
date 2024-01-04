@@ -123,22 +123,10 @@
                                 </a>
                             </li>
                             <li class="nav-item" title="{{ trans('help') }}">
-                                {% if constant('CITY_URL') is defined %}
-                                    <a class="nav-link" id="menuIconHelp" target="_blank"
-                                       href="https://factura.city/ayuda?action=controller&name={{ fsc.getPageData().name }}">
-                                        <i class="fas fa-question-circle" aria-hidden="true"></i>
-                                    </a>
-                                {% elseif constant('MC20_INSTALLATION') is defined %}
-                                    <a class="nav-link" id="menuIconHelp" target="_blank"
-                                       href="/support?action=controller&name={{ fsc.getPageData().name }}">
-                                        <i class="fas fa-question-circle" aria-hidden="true"></i>
-                                    </a>
-                                {% else %}
-                                    <a class="nav-link" id="menuIconHelp" href="https://facturascripts.com/ayuda"
-                                       target="_blank">
-                                        <i class="fas fa-question-circle fa-fw" aria-hidden="true"></i>
-                                    </a>
-                                {% endif %}
+                                <a class="nav-link" id="menuIconHelp" href="https://facturascripts.com/ayuda"
+                                   target="_blank">
+                                    <i class="fas fa-question-circle fa-fw" aria-hidden="true"></i>
+                                </a>
                             </li>
                             <li class="nav-item dropdown" title="{{ trans('user') }}">
                                 <a class="nav-link dropdown-toggle mr-md-2" href="#" data-toggle="dropdown"
@@ -150,13 +138,14 @@
                                         <i class="fas fa-user-circle fa-fw" aria-hidden="true"></i> {{ fsc.user.nick }}
                                     </a>
                                     <a class="dropdown-item send-email" href="SendMail">
-                                        <i class="fas fa-envelope fa-fw" aria-hidden="true"></i> {{ trans('send-mail') }}
+                                        <i class="fas fa-envelope fa-fw"
+                                           aria-hidden="true"></i> {{ trans('send-mail') }}
                                     </a>
                                     {% for item in getIncludeViews('MenuTemplate', 'MenuIconUser') %}
                                         {% include item['path'] %}
                                     {% endfor %}
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="?logout=TRUE">
+                                    <a class="dropdown-item" href="{{ asset('login') }}?action=logout&multireqtoken={{ formToken(false) }}">
                                         <i class="fas fa-door-open fa-fw" aria-hidden="true"></i> {{ trans('logout') }}
                                     </a>
                                 </div>
