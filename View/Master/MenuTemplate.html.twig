@@ -93,7 +93,7 @@
     {% block navbar %}
         <nav class="navbar navbar-expand navbar-dark bg-primary sticky-top d-print-none">
             {% block navbarContent %}
-                <a class="navbar-brand text-capitalize d-none d-sm-inline" href="{{ asset('') }}"
+                <a class="navbar-brand text-capitalize d-none d-sm-inline" href="{{ asset(fsc.user.homepage) }}"
                    title="{{ trans('homepage') }}">
                     <i class="fas fa-folder-open"></i>
                     <span class="d-none d-xl-inline">{{ fsc.empresa.nombrecorto | raw }}</span>
