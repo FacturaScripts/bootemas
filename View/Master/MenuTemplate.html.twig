@@ -1,7 +1,7 @@
 {#
 /**
  * This file is part of FacturaScripts
- * Copyright (C) 2017-2023 Carlos Garcia Gomez <carlos@facturascripts.com>
+ * Copyright (C) 2017-2025 Carlos Garcia Gomez <carlos@facturascripts.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as
@@ -17,12 +17,14 @@
  * along with this program. If not, see http://www.gnu.org/licenses/.
  */
 #}
+{% import 'Macro/GoogleTagManager.html.twig' as GoogleTagManager %}
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="{{ constant('FS_LANG') | slice(0, 2) }}"
       xml:lang="{{ constant('FS_LANG') | slice(0, 2) }}">
 <head>
-    {% for item in getIncludeViews('MenuTemplate', 'HeadFirst') %}
-        {% include item['path'] %}
+    {{ GoogleTagManager.head() }}
+    {% for includeView in getIncludeViews('MenuTemplate', 'HeadFirst') %}
+        {% include includeView['path'] %}
     {% endfor %}
     {% block meta %}
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -80,13 +82,16 @@
     {% for item in getIncludeViews('MenuTemplate', 'JsHeadAfter') %}
         {% include item['path'] %}
     {% endfor %}
-    {{ debugBarRender.renderHead() | raw }}
+    {% if debugBarRender %}
+        {{ debugBarRender.renderHead() | raw }}
+    {% endif %}
     {% for item in getIncludeViews('MenuTemplate', 'HeadEnd') %}
         {% include item['path'] %}
     {% endfor %}
 </head>
 {% block fullBody %}
     <body>
+    {{ GoogleTagManager.body() }}
     {% for item in getIncludeViews('MenuTemplate', 'BodyFirst') %}
         {% include item['path'] %}
     {% endfor %}
@@ -185,7 +190,9 @@
     {% for item in getIncludeViews('MenuTemplate', 'BodyEnd') %}
         {% include item['path'] %}
     {% endfor %}
-    {{ debugBarRender.render() | raw }}
+    {% if debugBarRender %}
+        {{ debugBarRender.render() | raw }}
+    {% endif %}
     <br/>
     <br/>
     <br/>
