@@ -110,7 +110,7 @@
                             {{ macros.showMenu(menuItem) }}
                         {% endfor %}
                     </ul>
-                    <ul class="navbar-nav flex-row ms-auto">
+                    <ul class="navbar-nav flex-row ml-auto">
                         {% block navbarMenuIcon %}
                             {% for item in getIncludeViews('MenuTemplate', 'MenuIconBefore') %}
                                 {% include item['path'] %}
