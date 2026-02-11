@@ -95,75 +95,79 @@
     {% endfor %}
     {% block navbar %}
         <nav class="navbar navbar-expand navbar-dark bg-primary sticky-top d-print-none">
-            {% block navbarContent %}
-                <a class="navbar-brand text-capitalize d-none d-sm-inline ms-3" href="{{ asset(fsc.user.homepage) }}"
-                   title="{{ trans('homepage') }}">
-                    <i class="fa-solid fa-folder-open"></i>
-                    <span class="d-none d-xl-inline">{{ fsc.empresa.nombrecorto | raw }}</span>
-                </a>
-                <div class="navbar-collapse collapse">
-                    <ul class="navbar-nav pt-1">
-                        {% import 'Macro/Menu.html.twig' as macros %}
-                        {% for menuItem in menuManager.getMenu() %}
-                            {{ macros.showMenu(menuItem) }}
-                        {% endfor %}
-                    </ul>
-                    <ul class="navbar-nav flex-row ms-auto">
-                        {% block navbarMenuIcon %}
-                            {% for item in getIncludeViews('MenuTemplate', 'MenuIconBefore') %}
-                                {% include item['path'] %}
+            <div class="container-fluid">
+                {% block navbarContent %}
+                    <a class="navbar-brand text-capitalize d-none d-sm-inline ms-3"
+                       href="{{ asset(fsc.user.homepage) }}"
+                       title="{{ trans('homepage') }}">
+                        <i class="fa-solid fa-folder-open"></i>
+                        <span class="d-none d-xl-inline">{{ fsc.empresa.nombrecorto | raw }}</span>
+                    </a>
+                    <div class="navbar-collapse collapse">
+                        <ul class="navbar-nav pt-1">
+                            {% import 'Macro/Menu.html.twig' as macros %}
+                            {% for menuItem in menuManager.getMenu() %}
+                                {{ macros.showMenu(menuItem) }}
                             {% endfor %}
-                            <li class="nav-item{{ template == 'MegaSearch.html.twig' ? ' active' : '' }}"
-                                title="{{ trans('search') }}">
-                                <a class="nav-link" href="MegaSearch" id="menuIconSearch">
-                                    <i class="fa-solid fa-search" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <li class="nav-item{{ template == 'Dashboard.html.twig' ? ' active' : '' }}"
-                                title="{{ trans('dashboard') }}">
-                                <a class="nav-link" href="Dashboard" id="menuIconDashboard">
-                                    <i class="fa-solid fa-chalkboard-teacher" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            {% if not config('fs_hide_help_btn') %}
-                                <li class="nav-item" title="{{ trans('help') }}">
-                                    <a class="nav-link" id="menuIconHelp" href="https://facturascripts.com/ayuda"
-                                       target="_blank">
-                                        <i class="fa-solid fa-question-circle" aria-hidden="true"></i>
+                        </ul>
+                        <ul class="navbar-nav flex-row ms-auto">
+                            {% block navbarMenuIcon %}
+                                {% for item in getIncludeViews('MenuTemplate', 'MenuIconBefore') %}
+                                    {% include item['path'] %}
+                                {% endfor %}
+                                <li class="nav-item{{ template == 'MegaSearch.html.twig' ? ' active' : '' }}"
+                                    title="{{ trans('search') }}">
+                                    <a class="nav-link" href="MegaSearch" id="menuIconSearch">
+                                        <i class="fa-solid fa-search" aria-hidden="true"></i>
                                     </a>
                                 </li>
-                            {% endif %}
-                            <li class="nav-item dropdown" title="{{ trans('user') }}">
-                                <a class="nav-link dropdown-toggle mr-md-2" href="#" data-bs-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false" id="menuIconUser">
-                                    <i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="user-list">
-                                    <a class="dropdown-item" href="{{ fsc.user.url() }}">
-                                        <i class="fa-solid fa-user-circle fa-fw me-1" aria-hidden="true"></i>
-                                        {{ fsc.user.nick }}
+                                <li class="nav-item{{ template == 'Dashboard.html.twig' ? ' active' : '' }}"
+                                    title="{{ trans('dashboard') }}">
+                                    <a class="nav-link" href="Dashboard" id="menuIconDashboard">
+                                        <i class="fa-solid fa-chalkboard-teacher" aria-hidden="true"></i>
                                     </a>
-                                    <a class="dropdown-item send-email" href="SendMail">
-                                        <i class="fa-solid fa-envelope fa-fw me-1" aria-hidden="true"></i>
-                                        {{ trans('send-mail') }}
+                                </li>
+                                {% if not config('fs_hide_help_btn') %}
+                                    <li class="nav-item" title="{{ trans('help') }}">
+                                        <a class="nav-link" id="menuIconHelp" href="https://facturascripts.com/ayuda"
+                                           target="_blank">
+                                            <i class="fa-solid fa-question-circle" aria-hidden="true"></i>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                                <li class="nav-item dropdown" title="{{ trans('user') }}">
+                                    <a class="nav-link dropdown-toggle mr-md-2" href="#" data-bs-toggle="dropdown"
+                                       aria-haspopup="true" aria-expanded="false" id="menuIconUser">
+                                        <i class="fa-solid fa-user-circle" aria-hidden="true"></i>
                                     </a>
-                                    {% for item in getIncludeViews('MenuTemplate', 'MenuIconUser') %}
-                                        {% include item['path'] %}
-                                    {% endfor %}
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="{{ asset('login') }}?action=logout&multireqtoken={{ formToken(false) }}">
-                                        <i class="fa-solid fa-door-open fa-fw me-1" aria-hidden="true"></i>
-                                        {{ trans('logout') }}
-                                    </a>
-                                </div>
-                            </li>
-                            {% for item in getIncludeViews('MenuTemplate', 'MenuIconAfter') %}
-                                {% include item['path'] %}
-                            {% endfor %}
-                        {% endblock %}
-                    </ul>
-                </div>
-            {% endblock %}
+                                    <div class="dropdown-menu dropdown-menu-end" aria-labelledby="user-list">
+                                        <a class="dropdown-item" href="{{ fsc.user.url() }}">
+                                            <i class="fa-solid fa-user-circle fa-fw me-1" aria-hidden="true"></i>
+                                            {{ fsc.user.nick }}
+                                        </a>
+                                        <a class="dropdown-item send-email" href="SendMail">
+                                            <i class="fa-solid fa-envelope fa-fw me-1" aria-hidden="true"></i>
+                                            {{ trans('send-mail') }}
+                                        </a>
+                                        {% for item in getIncludeViews('MenuTemplate', 'MenuIconUser') %}
+                                            {% include item['path'] %}
+                                        {% endfor %}
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item"
+                                           href="{{ asset('login') }}?action=logout&multireqtoken={{ formToken(false) }}">
+                                            <i class="fa-solid fa-door-open fa-fw me-1" aria-hidden="true"></i>
+                                            {{ trans('logout') }}
+                                        </a>
+                                    </div>
+                                </li>
+                                {% for item in getIncludeViews('MenuTemplate', 'MenuIconAfter') %}
+                                    {% include item['path'] %}
+                                {% endfor %}
+                            {% endblock %}
+                        </ul>
+                    </div>
+                {% endblock %}
+            </div>
         </nav>
     {% endblock %}
     <div class="bg-header pt-3">
