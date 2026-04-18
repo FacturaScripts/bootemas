@@ -115,22 +115,22 @@
                                 {% for item in getIncludeViews('MenuTemplate', 'MenuIconBefore') %}
                                     {% include item['path'] %}
                                 {% endfor %}
-                                <li class="nav-item{{ template == 'MegaSearch.html.twig' ? ' active' : '' }}"
-                                    title="{{ trans('search') }}">
-                                    <a class="nav-link" href="MegaSearch" id="menuIconSearch">
+                                <li class="nav-item" title="{{ trans('search') }}">
+                                    <a class="nav-link{{ template == 'MegaSearch.html.twig' ? ' active' : '' }}"
+                                       href="MegaSearch" id="menuIconSearch">
                                         <i class="fa-solid fa-search" aria-hidden="true"></i>
                                     </a>
                                 </li>
-                                <li class="nav-item{{ template == 'Dashboard.html.twig' ? ' active' : '' }}"
-                                    title="{{ trans('dashboard') }}">
-                                    <a class="nav-link" href="Dashboard" id="menuIconDashboard">
+                                <li class="nav-item" title="{{ trans('dashboard') }}">
+                                    <a class="nav-link{{ template == 'Dashboard.html.twig' ? ' active' : '' }}"
+                                       href="Dashboard" id="menuIconDashboard">
                                         <i class="fa-solid fa-chalkboard-teacher" aria-hidden="true"></i>
                                     </a>
                                 </li>
                                 {% if not config('fs_hide_help_btn') %}
                                     <li class="nav-item" title="{{ trans('help') }}">
-                                        <a class="nav-link" id="menuIconHelp" href="https://facturascripts.com/ayuda"
-                                           target="_blank">
+                                        <a class="nav-link" id="menuIconHelp" rel="nofollow" target="_blank"
+                                           href="https://facturascripts.com/ayuda?controller={{ controllerName }}">
                                             <i class="fa-solid fa-question-circle" aria-hidden="true"></i>
                                         </a>
                                     </li>
