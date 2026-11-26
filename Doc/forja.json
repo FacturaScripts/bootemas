@@ -6,7 +6,17 @@
             "permalink": "personalizar-el-diseno-de-facturascripts",
             "ordernum": 100,
             "visibility": true,
-            "idpublication": 2306
+            "idpublication": 2306,
+            "assets": {
+                "Assets/personalizar-el-diseno-de-facturascripts/01-cambiar-tema-global.png": {
+                    "url": "/MyFiles/2026/11/8474_forja_zb3wpujcca_01_cambiar_tema_global.png?myft=fac2b93ee0729a6c2f12291b74374a80b3a76f7caa58c2fc526af65367daff56",
+                    "sha256": "98db1bf0ca1a4a8fd1dcc34ad0a10187162b130f3065da82e8ef5ccf95dcc5f6"
+                },
+                "Assets/personalizar-el-diseno-de-facturascripts/02-cambiar-tema-usuario.png": {
+                    "url": "/MyFiles/2026/11/8475_forja_qy25xipf1h_02_cambiar_tema_usuario.png?myft=9e245292eb0e114ad9f379854adc44af8b09b681ecaac15849544e894ee80986",
+                    "sha256": "96de3b8934a1785b2410bfa788ec3f548aad66f726c7d178a19c8da20df1170c"
+                }
+            }
         }
     },
     "Dev": {}
