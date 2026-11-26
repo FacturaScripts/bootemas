@@ -2,19 +2,44 @@
   "base_url": "https://facturascripts.localhost/",
   "login": true,
   "output_dir": "Doc/Assets/personalizar-el-diseno-de-facturascripts",
-  "viewport": {"width": 1280, "height": 800, "scale": 1},
+  "viewport": {
+    "width": 1280,
+    "height": 800,
+    "scale": 1
+  },
   "captures": [
     {
       "name": "01-cambiar-tema-global",
       "url": "EditSettings?activetab=SettingsDefault",
-      "steps": [{"scroll_to": "select[name=\"bootema\"]"}],
-      "highlight": [{"target": "select[name=\"bootema\"]", "label": "1"}]
+      "steps": [
+        {
+          "scroll_to": "select[name=\"bootema\"]"
+        }
+      ],
+      "highlight": [
+        {
+          "target": "select[name=\"bootema\"]",
+          "label": "1"
+        }
+      ],
+      "hide": [
+        "input[name=\"site_url\"]"
+      ]
     },
     {
       "name": "02-cambiar-tema-usuario",
-      "url": "ListUser",
-      "steps": [],
-      "highlight": []
+      "url": "EditUser?code=admin",
+      "steps": [
+        {
+          "scroll_to": "select[name=\"bootema\"]"
+        }
+      ],
+      "highlight": [
+        {
+          "target": "select[name=\"bootema\"]",
+          "label": "1"
+        }
+      ]
     }
   ]
 }
